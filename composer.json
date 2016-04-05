@@ -1,0 +1,39 @@
+{
+  "name": "andersonef/gh-base-component",
+  "description": "Girolando - BaseComponent",
+  "keywords": [
+    "laravel",
+    "girolando",
+    "componente",
+    "animal"
+  ],
+  "licence": "MIT",
+  "authors": [
+    {
+      "name": "Anderson Nunes",
+      "email": "anderson.nuneseth@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "illuminate/support" : "5.1.x"
+  },
+  "autoload": {
+    "psr-4": {
+      "Andersonef\\BaseComponent\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Andersonef\\Tests\\BaseComponent\\": "tests/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
+
