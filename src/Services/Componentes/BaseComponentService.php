@@ -5,8 +5,7 @@
  * Date: 29/03/2016
  * Time: 15:07
  */
-
-namespace App\Services\Componentes;
+namespace Andersonef\BaseComponent\Services\Componentes;
 
 
 abstract class BaseComponentService
