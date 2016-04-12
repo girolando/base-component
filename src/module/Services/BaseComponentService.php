@@ -5,7 +5,7 @@
  * Date: 29/03/2016
  * Time: 15:07
  */
-namespace Andersonef\BaseComponent\Services;
+namespace Girolando\BaseComponent\Services;
 
 
 abstract class BaseComponentService

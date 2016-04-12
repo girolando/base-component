@@ -1,5 +1,5 @@
 {
-  "name": "andersonef/gh-base-component",
+  "name": "girolando/base-component",
   "description": "Girolando - BaseComponent",
   "keywords": [
     "laravel",
@@ -19,14 +19,15 @@
     "illuminate/support" : "5.1.x",
     "illuminate/routing" : "5.1.x"
   },
+
   "autoload": {
     "psr-4": {
-      "Andersonef\\BaseComponent\\": "src/module/"
+      "Girolando\\BaseComponent\\": "src/module/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Andersonef\\Tests\\BaseComponent\\": "tests/"
+      "Girolando\\Tests\\BaseComponent\\": "tests/"
     }
   },
   "extra": {

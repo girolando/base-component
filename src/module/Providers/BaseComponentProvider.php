@@ -6,7 +6,7 @@
  * Time: 11:38
  */
 
-namespace Andersonef\BaseComponent\Providers;
+namespace Girolando\BaseComponent\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Routing\Router;
