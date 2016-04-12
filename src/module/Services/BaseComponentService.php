@@ -5,7 +5,7 @@
  * Date: 29/03/2016
  * Time: 15:07
  */
-namespace Andersonef\BaseComponent\Services\Componentes;
+namespace Andersonef\BaseComponent\Services;
 
 
 abstract class BaseComponentService
@@ -15,7 +15,7 @@ abstract class BaseComponentService
     public function init($params = [])
     {
         $customView = $this->_init($params);
-        return view('Services.Componentes.BaseComponent.init', ['customView' => $customView]);
+        return view('_GHBaseComponent::Services.BaseComponentService.init', ['customView' => $customView]);
     }
 
 }
