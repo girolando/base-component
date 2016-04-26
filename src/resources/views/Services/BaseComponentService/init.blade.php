@@ -5,6 +5,7 @@
 
 
 @section('javascript')
+    @include('layout.footerPartials.datatable')
     @if(!$isLoaded)
         <script type="text/javascript">
             const Componente = {
