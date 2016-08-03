@@ -200,6 +200,14 @@
                         return this;
                     }
 
+
+                    /**
+                     * Dispara o método principal do componente geralmente abrindo uma janela de busca.
+                     * */
+                    implementacao.dispatch          = function(){
+                        this.onSearchButtonClick();
+                    }
+
                     /**
                      * Método principal do componente. Deve ser implementado na classe do componente.
                      * @type {*|Function}
