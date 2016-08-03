@@ -22,4 +22,9 @@ class BaseComponentProvider extends RouteServiceProvider
         parent::boot($router);
     }
 
+    public function map(Router $router)
+    {
+
+    }
+
 }
