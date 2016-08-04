@@ -64,7 +64,8 @@ class DatasetEngine
                     $queryBuilder->whereIn($filter, $values);
                 }
             }
-            //$queryBuilder = $queryBuilder->getQuery();
+            if($queryBuilder instanceof \Illuminate\Database\Eloquent\Builder)
+                $queryBuilder = $queryBuilder->getQuery();
         }
         $queryBuilder->select(['*']);
         $dataset = $dataTableQuery->apply($queryBuilder);
