@@ -64,7 +64,7 @@ class DatasetEngine
                     $queryBuilder->whereIn($filter, $values);
                 }
             }
-            $queryBuilder = $queryBuilder->getQuery();
+            //$queryBuilder = $queryBuilder->getQuery();
         }
         $queryBuilder->select(['*']);
         $dataset = $dataTableQuery->apply($queryBuilder);
