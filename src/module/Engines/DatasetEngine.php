@@ -38,17 +38,34 @@ class DatasetEngine
         $dataTableQuery = DataTableQuery::getInstance($this->dataTableQueryName);
         $filters = (array) $dataTableQuery->getFilters();
 
+        //correção de problemas do uppercase...
+        foreach($searchableFields as $key => $field){
+            $searchableFields[$key] = strtolower($field);
+        }
 
         if($filters){
             $nfilters = [];
+            $orFilters = [];
             foreach($filters as $filter => $value){
-                if(!in_array($filter, $searchableFields)) continue;
+                if(!in_array(strtolower($filter), $searchableFields)) continue;
+
+                //O filtro é pra OR??
+                if(strpos($value, '|') !== false){
+                    $orFilters[$filter] = explode('|', $value);
+                    continue;
+                }
                 $nfilters[$filter] = $value;
             }
             if($nfilters) {
                 $queryBuilder = $this->service->findBy($nfilters);
-                $queryBuilder = $queryBuilder->getQuery();
             }
+            if($orFilters) {
+                foreach($orFilters as $filter => $values){
+
+                    $queryBuilder->whereIn($filter, $values);
+                }
+            }
+            $queryBuilder = $queryBuilder->getQuery();
         }
         $queryBuilder->select(['*']);
         $dataset = $dataTableQuery->apply($queryBuilder);
