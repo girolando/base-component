@@ -206,7 +206,7 @@
                      * Seta um atributo no DOM do componente
                      */
                     implementacao.setAttribute     = function(filter, value){
-                        this.$dom.prop(filter, value);
+                        this.$dom.attr(filter, value);
                     }
 
 
