@@ -69,6 +69,7 @@
                     implementacao._isDebug = false;
                     implementacao.name;
                     implementacao.$hidden = null;
+                    implementacao.$dom = null;
                     implementacao.Animal = null;
                     implementacao.params = {};
                     implementacao.$searchButton = null;
@@ -97,7 +98,7 @@
                      * @returns {*}
                      */
                     implementacao.getAttributes     = function(){
-                        return this.attributes;
+                        return this.$dom.getAttributes();
                     }
 
                     /**
@@ -202,6 +203,15 @@
 
 
                     /**
+                     * Seta um atributo no DOM do componente
+                     */
+                    implementacao.setAttribute     = function(filter, value){
+                        this.$dom.prop(filter, value);
+                    }
+
+
+
+                    /**
                      * Dispara o método principal do componente geralmente abrindo uma janela de busca.
                      * */
                     implementacao.dispatch          = function(){
@@ -240,6 +250,7 @@
 
                         uniqueItem.prop('type', 'hidden');
                         var comp = Componente.newComponente(new type(uniqueItem.attr('name'), uniqueItem.getAttributes()));
+                        comp.$dom = uniqueItem;
                         uniqueItem.data()._componente = comp;
                         this._items.put(uniqueItem.attr('name'), comp);
 

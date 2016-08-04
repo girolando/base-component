@@ -37,11 +37,10 @@ class DatasetEngine
         $queryBuilder = $this->service->getQuery();
         $dataTableQuery = DataTableQuery::getInstance($this->dataTableQueryName);
         $filters = (array) $dataTableQuery->getFilters();
-
-        //correção de problemas do uppercase...
         foreach($searchableFields as $key => $field){
             $searchableFields[$key] = strtolower($field);
         }
+
 
         if($filters){
             $nfilters = [];
