@@ -215,6 +215,7 @@
                      * Dispara o método principal do componente geralmente abrindo uma janela de busca.
                      * */
                     implementacao.dispatch          = function(){
+                        if(!comp.triggerEvent(Componente.EVENTS.ON_BEFORE_CLICK)) return;
                         this.onSearchButtonClick();
                     }
 
