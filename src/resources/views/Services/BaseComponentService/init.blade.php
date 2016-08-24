@@ -5,7 +5,11 @@
 
 
 @section('javascript')
-    @include('layout.footerPartials.datatable')
+    @if(!isset($_customDataTableIsLoaded))
+        @include('layout.footerPartials.datatable')
+    @endif
+
+
     @if(!$isLoaded)
         <script type="text/javascript">
             const Componente = {
