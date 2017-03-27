@@ -18,11 +18,15 @@ class DataTableQuery
     private $db;
     private $filters;
     private $request;
+    private $isSimpleRequest = false;
 
     private function __construct($name){
         $this->request = Request::capture();
         $this->db = app(DatabaseManager::class);
-        if(!$this->request->has('_DataTableQuery')) throw new \Exception('Invalid input data for DataTableQuery: '.print_r($this->request->all(), true));
+        if(!$this->request->has('_DataTableQuery')) {
+            $this->isSimpleRequest = true;
+            return;
+        }
         $this->filters = json_decode($this->request->_DataTableQuery[$name])->$name;
 
     }
@@ -30,6 +34,7 @@ class DataTableQuery
 
     public function fetchSelectedItems(QueryBuilder $builder)
     {
+        if($this->isSimpleRequest) return $builder;
         $self = $this;
         $this->filters->items[] = -1;
         //faço a busca de acordo com a palavra pesquisada, caso tenha uma:
@@ -59,12 +64,14 @@ class DataTableQuery
 
     public function getFilters()
     {
+        if($this->isSimpleRequest) return (object) [];
         return $this->filters->filters;
     }
 
 
     public function apply(QueryBuilder $builder)
     {
+        if($this->isSimpleRequest) return $builder;
 
         if(!$this->request->has('_DatatableQuery') || !isset($this->filters->idField)) {
             $builder->addSelect($this->db->raw('0 as _checked'));
