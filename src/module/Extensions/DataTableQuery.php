@@ -32,6 +32,19 @@ class DataTableQuery
     }
 
 
+    /** Retorna true caso a requisição ao servidor não esteja esperando um datatable. Se retornar false é pq os dados de request da datatable js vieram na request
+     * @return bool
+     */
+    public function isSimpleRequest()
+    {
+        return $this->isSimpleRequest;
+    }
+
+
+    /** Retorna um QueryBuilder representando todos os resultadoss marcados pelo usuário.
+     * @param QueryBuilder $builder
+     * @return QueryBuilder
+     */
     public function fetchSelectedItems(QueryBuilder $builder)
     {
         if($this->isSimpleRequest) return $builder;
@@ -56,12 +69,19 @@ class DataTableQuery
         return $builder;
     }
 
+    /** Retorna a instancia singleton do DatatableQuery.
+     * @param $name
+     * @return mixed
+     */
     public static function getInstance($name)
     {
         if(!isset(self::$instances[$name])) self::$instances[$name] = new DataTableQuery($name);
         return self::$instances[$name];
     }
 
+    /** Retorna um plain object representando os filtros setados na lib js. Utilize tais filtros para filtrar o resultado para a datatable.
+     * @return object
+     */
     public function getFilters()
     {
         if($this->isSimpleRequest) return (object) [];
@@ -69,6 +89,10 @@ class DataTableQuery
     }
 
 
+    /** Método que trata o querybuilder cru e adiciona o campo que representa se a row está marcada ou não. Utilize sempre antes de transformar esse queryBuilder em JsonResponse para a datatable.
+     * @param QueryBuilder $builder
+     * @return QueryBuilder
+     */
     public function apply(QueryBuilder $builder)
     {
         if($this->isSimpleRequest) return $builder;
