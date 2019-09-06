@@ -33,7 +33,7 @@ class DatasetEngine
     public function createDataset(array $searchableFields)
     {
         if(!$this->dataTableQueryName) throw new GirolandoComponentException('Chamada ao createDataset sem informar antes o dataTAbleQueryName pelo método usingDataTableQuery()');
-        
+
         $queryBuilder = $this->service->getQuery();
         $dataTableQuery = DataTableQuery::getInstance($this->dataTableQueryName);
         $filters = (array) $dataTableQuery->getFilters();
@@ -45,22 +45,34 @@ class DatasetEngine
         if($filters){
             $nfilters = [];
             $orFilters = [];
+            $likeFilters = [];
             foreach($filters as $filter => $value){
-                if(!in_array(strtolower($filter), $searchableFields)) continue;
+                if(!in_array(str_replace('like-', '', strtolower($filter)), $searchableFields)) continue;
 
                 //O filtro é pra OR??
                 if(strpos($value, '|') !== false){
                     $orFilters[$filter] = explode('|', $value);
                     continue;
                 }
+
+                if(strpos($filter, 'like-') !== false){
+                    $likeFilters[substr($filter, 5)] = $value;
+                    continue;
+                }
+
                 $nfilters[$filter] = $value;
             }
             if($nfilters) {
                 $queryBuilder = $this->service->findBy($nfilters);
             }
+            //Like filters
+            if($likeFilters){
+                foreach($likeFilters as $filter => $value){
+                    $queryBuilder->where($filter, 'like', $value);
+                }
+            }
             if($orFilters) {
                 foreach($orFilters as $filter => $values){
-
                     $queryBuilder->whereIn($filter, $values);
                 }
             }
