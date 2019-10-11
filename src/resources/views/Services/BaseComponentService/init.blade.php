@@ -213,6 +213,21 @@
                         this.$dom.attr(filter, value);
                     }
 
+                    /**
+                    * Busca um elemento do tipo do componente usando o objeto do parâmetro para realizar a busca
+                    */
+                    implementacao.findBy            = function(obj) {
+                        if (!this.urlFindBy) {
+                            throw new Error("urlFindBy não configurada no componente em questão");
+                        }
+                        return new Promise((resolve, reject) => {
+                            $.get(implementacao.urlFindBy, obj, function(response) {
+                                resolve(JSON.parse(response));
+                            }).fail(function(err) {
+                                reject(err);
+                            })
+                        });
+                    }
 
 
                     /**
