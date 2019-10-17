@@ -222,7 +222,7 @@
                         }
                         return new Promise((resolve, reject) => {
                             $.get(implementacao.urlFindBy, obj, function(response) {
-                                resolve(JSON.parse(response));
+                                resolve(response);
                             }).fail(function(err) {
                                 reject(err);
                             })
