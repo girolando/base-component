@@ -45,7 +45,7 @@
                     var eventos = this.EventStack.get(event); //lista de todos os eventos do tipo solicitado:
                     for(var i in eventos){
                         if(!Object.is(object, eventos[i].getObject())) continue; //coisa linda de Deus esse Object.is
-                        eventos[i].triggerEvent(params);
+                            eventos[i].triggerEvent(params);
                     }
                 },
 
