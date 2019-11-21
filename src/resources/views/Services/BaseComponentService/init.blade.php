@@ -198,7 +198,7 @@
                         var comp = this;
                         if(!btn.jquery) throw "Componente Animal: o objeto passado para o método setSearchButton deve ser um jQuery Object!";
                         this.$searchButton = btn;
-                        btn.on('click', function(){
+                        $(document).on('click', btn.selector, function(){ 
                             if(!comp.triggerEvent(Componente.EVENTS.ON_BEFORE_CLICK)) return;
                             comp.onSearchButtonClick();
                         });
