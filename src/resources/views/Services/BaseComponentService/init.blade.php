@@ -282,6 +282,20 @@
                         if(uniqueItem.attr('multiple')){
                             comp.setMultiple(true);
                         }
+
+                        //Validação para não abrir o mesmo componente 2 vezes
+                        comp.aberto = false;
+                        comp.addEventListener(Componente.EVENTS.ON_BEFORE_CLICK, function(){
+                            if(comp.aberto == true){
+                                console.warn('Componente já está aberto, por favor verifique se não há dois eventos lançando um "dispatch" do mesmo componente')
+                                throw "Componente ja aberto"              
+                            } 
+                            comp.aberto = true;
+                        });
+
+                        comp.addEventListener(Componente.EVENTS.ON_FINISH, function(){
+                            comp.aberto = false;
+                        });
                     }
                     return implementacao;
                 }
