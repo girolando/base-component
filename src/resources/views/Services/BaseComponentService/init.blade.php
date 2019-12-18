@@ -42,10 +42,10 @@
                 },
 
                 triggerEvent : function(object, event, params){
-                    var eventos = this.EventStack.get(event); //lista de todos os eventos do tipo solicitado:
-                    for(var i in eventos){
-                        if(!Object.is(object, eventos[i].getObject())) continue; //coisa linda de Deus esse Object.is
-                            eventos[i].triggerEvent(params);
+                    const eventos = this.EventStack.get(event); //lista de todos os eventos do tipo solicitado:
+                    for(let evento of eventos){
+                        if(!Object.is(object, evento.getObject())) continue; //coisa linda de Deus esse Object.is
+                            evento.triggerEvent(params);
                     }
                 },
 
@@ -199,7 +199,7 @@
                         if(!btn.jquery) throw "Componente Animal: o objeto passado para o método setSearchButton deve ser um jQuery Object!";
                         this.$searchButton = btn;
                         //Limpo o elemento e recrio o bind novamente para evitar problemas de adicionar mais de um evento ao mesmo componente
-                        $(document).off('click').on('click', btn.selector, function(){ 
+                        $(document).off('click', btn.selector).on('click', btn.selector, function(){
                             if(!comp.triggerEvent(Componente.EVENTS.ON_BEFORE_CLICK)) return;
                             comp.onSearchButtonClick();
                         });
